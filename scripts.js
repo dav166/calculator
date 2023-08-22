@@ -23,3 +23,7 @@ console.log(subtract(10, 4)); // 6
 console.log(multiply(2, 3)); // 6
 console.log(divide(9, 3)); // 3
 console.log(divide(9, 0)); // Error: Cannot divide by zero!
+
+let firstNumber = null;
+let operator = null;
+let secondNumber = null;
