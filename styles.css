@@ -1,0 +1,24 @@
+.calculator {
+    width: 200px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+#display {
+    background-color: #f0f0f0;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin: 5px;
+}
+
+.operator {
+    color: blue;
+}
