@@ -27,3 +27,22 @@ console.log(divide(9, 0)); // Error: Cannot divide by zero!
 let firstNumber = null;
 let operator = null;
 let secondNumber = null;
+
+function operate(operator, a, b) {
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return subtract(a, b);
+        case '*':
+            return multiply(a, b);
+        case '-':
+            return divide(a, b);
+        default:
+            return "Error: Invalid operator!";
+    }
+}
+
+// Testing
+console.log(operate('+', 5, 3)); // 8
+console.log(operate('-, 10, 4')); // 6
