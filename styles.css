@@ -64,10 +64,10 @@ body {
     margin-bottom: 5px;
   }
   
-  #clear {
+  #clear, #equals {
     display: block;
     width: 100%;
-    margin-top: 5px 0;
+    margin-top: 5px;
     text-align: center;
     padding: 10px;
   }
