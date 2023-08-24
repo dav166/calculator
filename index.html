@@ -9,25 +9,32 @@
 <body>
     <div class="calculator">
         <div id="display">0</div>
-        <button class="number" value="1">1</button>
-        <button class="number" value="2">2</button>
-        <button class="number" value="3">3</button>
-        <button class="operator" value="+">+</button>
-        <button class="number" value="4">4</button>
-        <button class="number" value="5">5</button>
-        <button class="number" value="6">6</button>
-        <button class="operator" value="-">-</button>
-        <button class="number" value="7">7</button>
-        <button class="number" value="8">8</button>
-        <button class="number" value="9">9</button>
-        <button class="operator" value="*">*</button>
-        <button class="number" value="0">0</button>
+        <div class="row">
+            <button class="number" value="7">7</button>
+            <button class="number" value="8">8</button>
+            <button class="number" value="9">9</button>
+            <button class="operator" value="/">/</button>
+        </div>
+        <div class="row">
+            <button class="number" value="4">4</button>
+            <button class="number" value="5">5</button>
+            <button class="number" value="6">6</button>
+            <button class="operator" value="*">*</button>
+        </div>
+        <div class="row">
+            <button class="number" value="1">1</button>
+            <button class="number" value="2">2</button>
+            <button class="number" value="3">3</button>
+            <button class="operator" value="-">-</button>
+        </div>
+        <div class="row">
+            <button class="number" value="0">0</button>
+            <button id="decimal">.</button>
+            <button id="backspace">←</button>
+            <button id="equals">=</button>
+        </div>
         <button id="clear">Clear</button>
-        <button class="operator" value="/">/</button>
-        <button id="equals">=</button>
-        <button id="decimal">.</button>
-        <button id="backspace">←</button>
-    </div>
+    </div>    
     <script src="script.js"></script>
 </body>
 </html>
