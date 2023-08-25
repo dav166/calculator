@@ -13,7 +13,7 @@ html {
 
 body {
     background: linear-gradient(to right, #ff6e7f, #bfe9ff);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Helvetica', 'Arial', sans-serif;
     align-items: center;
     display: flex;
     font-display: swap;
@@ -52,6 +52,7 @@ body {
     line-height: 40px;
     margin-bottom: 10px;
     font-size: 24px;
+    transition: all 0.3s;
   }
   
   button {
@@ -95,6 +96,8 @@ body {
 
   button:active {
     background-color: #ffef78;
+    transform: scale(0.95);
+    transition: transform 0.1s;
   }
   
   .operator, #decimal, #backspace {
