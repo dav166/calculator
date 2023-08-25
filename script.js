@@ -45,12 +45,14 @@ class Calculator {
     }
 
     handleNumberInput(value) {
+        let currentNumber = this.operator === null ? this.firstNumber : this.secondNumber;
+        currentNumber = (currentNumber === null || currentNumber === '0' ? '' : currentNumber) + value;
+        this.updateDisplay(currentNumber);
+    
         if (this.operator === null) {
-            this.firstNumber = (this.firstNumber || '0') + value;
-            this.updateDisplay(this.firstNumber);
+            this.firstNumber = currentNumber;
         } else {
-            this.secondNumber = (this.secondNumber || '0') + value;
-            this.updateDisplay(this.secondNumber);
+            this.secondNumber = currentNumber;
         }
     }
 
