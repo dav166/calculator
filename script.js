@@ -1,110 +1,111 @@
-function add(a, b) {
-    return a + b;
-  }
-  
-  function subtract(a, b) {
-    return a - b;
-  }
-  
-  function multiply(a, b) {
-    return a * b;
-  }
-  
-  function divide(a, b) {
-    if (b === 0) {
-      return "Error: Cannot divide by zero!";
+class Calculator {
+    constructor() {
+        this.firstNumber = null;
+        this.operator = null;
+        this.secondNumber = null;
+        this.init();
     }
-    return a / b;
-  }
-  
-  function operate(operator, a, b) {
-    switch (operator) {
-      case '+':
-        return add(a, b);
-      case '-':
-        return subtract(a, b);
-      case '*':
-        return multiply(a, b);
-      case '/':
-        return divide(a, b);
-      default:
-        return "Error: Invalid operator!";
+
+    init() {
+        document.querySelectorAll('.number').forEach(button => {
+            button.addEventListener('click', (e) => this.handleNumberInput(e.target.value));
+        });
+
+        document.querySelectorAll('.operator').forEach(button => {
+            button.addEventListener('click', (e) => {
+                this.operator = e.target.value;
+            });
+        });
+
+        document.getElementById('equals').addEventListener('click', this.evaluate.bind(this));
+        document.getElementById('clear').addEventListener('click', this.clear.bind(this));
+        document.getElementById('decimal').addEventListener('click', this.handleDecimal.bind(this));
+        document.getElementById('backspace').addEventListener('click', this.handleBackspace.bind(this));
+        document.getElementById('percent').addEventListener('click', this.handlePercent.bind(this));
+        document.addEventListener('keydown', this.handleKeyboardInput.bind(this));
     }
-  }
-  
-  let firstNumber = null;
-  let operator = null;
-  let secondNumber = null;
-  
-  function updateDisplay(value) {
-    document.getElementById('display').innerText = value;
-  }
-  
-  function handleNumberInput(value) {
-    if (operator === null) {
-      firstNumber = (firstNumber || '0') + value;
-      updateDisplay(firstNumber);
-    } else {
-      secondNumber = (secondNumber || '0') + value;
-      updateDisplay(secondNumber);
+
+    add(a, b) { return a + b; }
+    subtract(a, b) { return a - b; }
+    multiply(a, b) { return a * b; }
+    divide(a, b) { return b === 0 ? "Error: Cannot divide by zero!" : a / b; }
+
+    operate(operator, a, b) {
+        switch (operator) {
+            case '+': return this.add(a, b);
+            case '-': return this.subtract(a, b);
+            case '*': return this.multiply(a, b);
+            case '/': return this.divide(a, b);
+            default: return "Error: Invalid operator!";
+        }
     }
-  }
-  
-  function handleBackspace() {
-    if (secondNumber !== null) {
-      secondNumber = secondNumber.slice(0, -1);
-      updateDisplay(secondNumber);
-    } else if (operator !== null) {
-      operator = null;
-    } else if (firstNumber !== null) {
-      firstNumber = firstNumber.slice(0, -1);
-      updateDisplay(firstNumber);
+
+    updateDisplay(value) {
+        document.getElementById('display').innerText = value;
     }
-  }
-  
-  document.querySelectorAll('.number').forEach(button => {
-    button.addEventListener('click', (e) => handleNumberInput(e.target.value));
-  });
-  
-  document.querySelectorAll('.operator').forEach(button => {
-    button.addEventListener('click', (e) => {
-      operator = e.target.value;
-    });
-  });
-  
-  document.getElementById('equals').addEventListener('click', () => {
-    if (firstNumber !== null && operator !== null && secondNumber !== null) {
-      const result = operate(operator, Number(firstNumber), Number(secondNumber));
-      updateDisplay(result);
-      firstNumber = result;
-      operator = null;
-      secondNumber = null;
+
+    handleNumberInput(value) {
+        if (this.operator === null) {
+            this.firstNumber = (this.firstNumber || '0') + value;
+            this.updateDisplay(this.firstNumber);
+        } else {
+            this.secondNumber = (this.secondNumber || '0') + value;
+            this.updateDisplay(this.secondNumber);
+        }
     }
-  });
-  
-  document.getElementById('clear').addEventListener('click', () => {
-    firstNumber = null;
-    operator = null;
-    secondNumber = null;
-    updateDisplay('0');
-  });
-  
-  document.getElementById('decimal').addEventListener('click', () => {
-    if (operator === null && !firstNumber.includes('.')) {
-      handleNumberInput('.');
-    } else if (!secondNumber.includes('.')) {
-      handleNumberInput('.');
+
+    handleBackspace() {
+        if (this.secondNumber !== null) {
+            this.secondNumber = this.secondNumber.slice(0, -1);
+            this.updateDisplay(this.secondNumber);
+        } else if (this.operator !== null) {
+            this.operator = null;
+        } else if (this.firstNumber !== null) {
+            this.firstNumber = this.firstNumber.slice(0, -1);
+            this.updateDisplay(this.firstNumber);
+        }
     }
-  });
-  
-  document.getElementById('backspace').addEventListener('click', handleBackspace);
-  
-  document.addEventListener('keydown', (e) => {
-    if ('0123456789'.includes(e.key)) handleNumberInput(e.key);
-    if ('+-*/'.includes(e.key)) operator = e.key;
-    if (e.key === '.') document.getElementById('decimal').click();
-    if (e.key === 'Backspace') document.getElementById('backspace').click();
-    if (e.key === 'Enter' || e.key === '=') document.getElementById('equals').click();
-    if (e.key === 'Escape') document.getElementById('clear').click();
-  });
-  
+
+    handlePercent() {
+        if (this.firstNumber !== null && this.secondNumber === null && this.operator === null) {
+            this.firstNumber = String(Number(this.firstNumber) / 100);
+            this.updateDisplay(this.firstNumber);
+        }
+    }
+
+    evaluate() {
+        if (this.firstNumber !== null && this.operator !== null && this.secondNumber !== null) {
+            const result = this.operate(this.operator, Number(this.firstNumber), Number(this.secondNumber));
+            this.updateDisplay(result);
+            this.firstNumber = result;
+            this.operator = null;
+            this.secondNumber = null;
+        }
+    }
+
+    clear() {
+        this.firstNumber = null;
+        this.operator = null;
+        this.secondNumber = null;
+        this.updateDisplay('0');
+    }
+
+    handleDecimal() {
+        if (this.operator === null && !this.firstNumber.includes('.')) {
+            this.handleNumberInput('.');
+        } else if (!this.secondNumber.includes('.')) {
+            this.handleNumberInput('.');
+        }
+    }
+
+    handleKeyboardInput(e) {
+        if ('0123456789'.includes(e.key)) this.handleNumberInput(e.key);
+        if ('+-*/'.includes(e.key)) this.operator = e.key;
+        if (e.key === '.') document.getElementById('decimal').click();
+        if (e.key === 'Backspace') document.getElementById('backspace').click();
+        if (e.key === 'Enter' || e.key === '=') document.getElementById('equals').click();
+        if (e.key === 'Escape') document.getElementById('clear').click();
+    }
+}
+
+const calculator = new Calculator();
