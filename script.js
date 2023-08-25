@@ -115,3 +115,10 @@ class Calculator {
 }
 
 const calculator = new Calculator();
+document.getElementById('theme-switcher').addEventListener('click', () => {
+    const body = document.body;
+    const calculator = document.querySelector('.calculator');
+    
+    body.classList.toggle('dark-mode');
+    calculator.classList.toggle('dark-mode');
+})

@@ -20,6 +20,11 @@ body {
     height: inherit;
     justify-content: center;
   }
+
+  body.dark-mode {
+    background: linear-gradient(to right, #000, #222);
+    color: #fff;
+  }
   
   .calculator {
     backdrop-filter: blur(5.5px);
@@ -36,6 +41,29 @@ body {
     box-sizing: border-box;
     flex-basis: 400px;
     height: 540px;
+  }
+
+  .calculator.dark-mode {
+    background: #333;
+    color: #f0f0f0;
+  }
+
+  .calculator.dark-mode #display {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #f0f0f0;
+  }
+
+  .calculator.dark-mode button {
+    background-color: #444;
+    color: #f0f0f0;
+  }
+
+  .calculator.dark-mode button.operator {
+    background-color: #4caf50;
+  }
+
+  .calculator.dark-mode button#equals {
+    background-color: #d32f2f;
   }
   
   #display {
@@ -136,4 +164,25 @@ body {
         margin: 2px;
         font-size: 18px;
     }
+  }
+
+  #theme-switcher {
+    background-color: #03a9f4;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    outline: none;
+    transition: background-color 0.3s;
+  }
+
+  #theme-switcher:hover {
+    background-color: #0288d1;
   }
