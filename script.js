@@ -70,6 +70,9 @@ class Calculator {
         if (this.firstNumber !== null && this.secondNumber === null && this.operator === null) {
             this.firstNumber = String(Number(this.firstNumber) / 100);
             this.updateDisplay(this.firstNumber);
+        } else if (this.secondNumber !== null) {
+            this.secondNumber = String(Number(this.secondNumber) / 100);
+            this.updateDisplay(this.secondNumber);
         }
     }
 
@@ -77,11 +80,11 @@ class Calculator {
         if (this.firstNumber !== null && this.operator !== null && this.secondNumber !== null) {
             const result = this.operate(this.operator, Number(this.firstNumber), Number(this.secondNumber));
             this.updateDisplay(result);
-            this.firstNumber = result;
+            this.firstNumber = String(result);
             this.operator = null;
             this.secondNumber = null;
         }
-    }
+    }    
 
     clear() {
         this.firstNumber = null;
@@ -91,21 +94,24 @@ class Calculator {
     }
 
     handleDecimal() {
-        if (this.operator === null && !this.firstNumber.includes('.')) {
-            this.handleNumberInput('.');
+        if (this.operator === null) {
+            if (!this.firstNumber.includes('.')) {
+                this.handleNumberInput('.');
+            }
         } else if (!this.secondNumber.includes('.')) {
             this.handleNumberInput('.');
         }
-    }
+    }    
 
     handleKeyboardInput(e) {
         if ('0123456789'.includes(e.key)) this.handleNumberInput(e.key);
         if ('+-*/'.includes(e.key)) this.operator = e.key;
-        if (e.key === '.') document.getElementById('decimal').click();
-        if (e.key === 'Backspace') document.getElementById('backspace').click();
+        if (e.key === '.') this.handleDecimal();
+        if (e.key === 'Backspace') this.handleBackspace();
         if (e.key === 'Enter' || e.key === '=') document.getElementById('equals').click();
         if (e.key === 'Escape') document.getElementById('clear').click();
-    }
+        if (e.key === '%') document.getElementById('percent').click();
+    }    
 }
 
 const calculator = new Calculator();
